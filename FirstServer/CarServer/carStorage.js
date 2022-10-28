@@ -1,6 +1,6 @@
 'use strict';
 
-const cars = require("./cars.json")
+const cars = require("../cars.json")
 
 const getAllCars = () =>{
     return cars;
