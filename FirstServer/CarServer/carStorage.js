@@ -1,6 +1,6 @@
 'use strict';
 
-const cars = require("../cars.json")
+const cars = require("./cars.json")
 
 const getAllCars = () =>{
     return cars;
@@ -9,7 +9,7 @@ const getAllCars = () =>{
 const getAllModels = () => {
     const models = [];
     for (const car of cars){
-        if (!cars.includes(car.model)){
+        if (!models.includes(car.model)){
             models.push(car.model)
         }
         return models

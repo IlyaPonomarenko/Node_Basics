@@ -7,7 +7,7 @@ localhost:3000/cars
 ```
 ## get all types
 ```
-http://localhost/cartypes
+http://localhost:3000/cartypes
 ```
 
 ## search by licence
