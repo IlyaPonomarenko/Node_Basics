@@ -12,8 +12,8 @@ const getAllModels = () => {
         if (!models.includes(car.model)){
             models.push(car.model)
         }
-        return models
     }
+    return models
 }
 
 const getCar = (key, value) =>{
