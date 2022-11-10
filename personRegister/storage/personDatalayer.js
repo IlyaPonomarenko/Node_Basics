@@ -1,19 +1,13 @@
-"use strict"
 
-const persons = require("./persons.json")
 
-function search(key, value){
-    if (key && value){
-        const found = [];
-        for (const person of persons){
-            if (person[key] == value){
-                found.push(person)
-            }
-        }
-        return found;
-    }
-    else{
-        return persons;
-    }
+"use strict";
+
+const persons = require("./person.json");
+
+function search(key, value) {
+  if (key && value) {
+    return persons.filter((person) => person[key] == value);
+  } else return persons;
 }
-module.exports={search}
+
+module.exports = { search };

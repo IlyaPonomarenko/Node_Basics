@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="basicStyles.css">
+  <head>
+    <meta charset="UTF-8" />
     <title>Home</title>
-</head>
-<body>
-    <h1>Home</h1>
-    <p>
-        <label for="key">key:</label>
-        <input type="text" id="key">
-    </p>
-    <p>
-        <label for="searchvalue">Value:</label>
-        <input type="text" name="" id="searchvalue">
-    </p>
-    <button id="submit"></button>
-    <section id="resultset">
+    <link rel="stylesheet" href="/styles/basicStyles.css" />
+    <script src="/js/update.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Search page</h1>
+      <p>
+        <label for="key">Key</label>
+        <input type="text" id="key" />
+      </p>
+      <p>
+        <label for="search-value">Value</label>
+        <input type="text" id="search-value" />
+      </p>
+      <button id="submit-btn">Submit</button>
+      <section id="result-section">
         <table>
-            <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>age</th>
-                </tr>
-            </thead>
-            <tbody id="resultset"></tbody>
+          <thead>
+            <tr>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody id="result-set"></tbody>
         </table>
-    </section>
-    <section id="messagearea"></section>
-</body>
+      </section>
+      <section id="message-section"></section>
+    </main>
+  </body>
 </html>

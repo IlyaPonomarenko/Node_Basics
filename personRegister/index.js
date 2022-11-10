@@ -1,12 +1,11 @@
+
 "use strict";
 
 const http = require("http");
-const { homedir } = require("os");
 const path = require("path");
-const { send } = require("process");
 
 const { sendFile } = require("./library/utilities");
-const { search } = require("./storage/personDatalayer");
+const { search } = require("./storage/personDataLayer");
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "localhost";
@@ -17,6 +16,7 @@ const server = http.createServer((req, res) => {
   const { pathname, searchParams } = new URL(
     `http://${req.headers.host}${req.url}`
   );
+
   const route = decodeURIComponent(pathname);
 
   if (route === "/") {
@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {
     sendFile(res, path.join(__dirname, route), "text/javascript");
   } else {
     let result = [];
-    if (route === "/person") {
+    if (route === "/persons") {
       result = search();
     } else if (route === "/persons/firstname") {
       result = search("firstname", searchParams.get("value"));
@@ -38,9 +38,11 @@ const server = http.createServer((req, res) => {
     } else {
       result = { message: "key not found" };
     }
-    res.writeHead(200, {"Content-Type":"application/json"});
+    res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(result));
   }
 });
-server.listen(port, host, 
-    () => console.log(`Server ${host}:${port} is running`))
+
+server.listen(port, host, () =>
+  console.log(`Server ${host} : ${port} listening`)
+);

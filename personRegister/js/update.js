@@ -1,30 +1,59 @@
+
 "use strict";
 
-const { subtle } = require("crypto");
-
 (function () {
-  let resultset;
-  let resultsection;
+  let resultSet;
+  let resultSection;
   let keyInput;
   let searchValueInput;
-  let messagearea;
-  document.addEventListener("DOMContentLoaded", init);
-  function init() {
-    resultset = document.getElementById("resultset");
-    resultsection = document.getElementById("resultsection");
-    keyInput = document.getElementById("key");
-    searchValueInput = document.getElementById("searchvalue");
-    messagearea = document.getElementById("messagearea");
+  let messageSection;
 
-    document.getElementById("submit").addEventListener("click", submit);
+  // After DOM is loaded, initialise the page
+  document.addEventListener("DOMContentLoaded", init);
+
+  function init() {
+    resultSet = document.getElementById("result-set");
+    resultSection = document.getElementById("result-section");
+    keyInput = document.getElementById("key");
+    searchValueInput = document.getElementById("search-value");
+    messageSection = document.getElementById("message-section");
+
+    document.getElementById("submit-btn").addEventListener("click", submit);
   }
+
   async function submit() {
     const key = keyInput.value;
     const searchValue = searchValueInput.value;
     try {
-        const uri = key ? `/person/${key}?value=${searchValue}`:"/persons";
-        const result = await fetch(uri);
-        const personData = await result.json()
-    } catch(err) {}
+      const uri = key ? `/persons/${key}?value=${searchValue}` : "/persons";
+      const result = await fetch(uri);
+      const personData = await result.json();
+      updatePage(personData);
+    } catch (err) {
+      showError(err.message);
+    }
+  }
+
+  function showError(message) {
+    messageSection.innerHTML = `<p>${message}</p>`;
+  }
+
+  function updatePage(searchResult) {
+    if (searchResult.message) {
+      showError(searchResult.message);
+    } else if (searchResult.length === 0) {
+      showError("No person found");
+    } else {
+      let htmlString = "";
+      for (const person of searchResult) {
+        htmlString += `<tr>
+                <td>${person.firstname}</td>
+                <td>${person.lastname}</td>
+                <td>${person.age}</td>
+            </tr>
+            `;
+      }
+      resultSet.innerHTML = htmlString;
+    }
   }
 })();
