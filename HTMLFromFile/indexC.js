@@ -18,7 +18,11 @@ const server = http.createServer( (req, res) => {
         sendFile(res, homePath)
     } else if(route === "/pageA"){
         sendFile(res, pageApath)
-    } else {
+    
+    } else if (route.startsWith("/styles/")){
+    sendFile(res, path.join(__dirname, route), "text/css")
+    }
+    else {
         res.statusCode=404;
         res.end("Error: page not found")
     }
@@ -26,11 +30,11 @@ const server = http.createServer( (req, res) => {
 server.listen(port, host, 
     () => console.log(`Server ${host}:${port} is running`))
 
-async function sendFile(res,filePath){
+async function sendFile(res,filePath, contentType = "text/html"){
     try{
         const data = await fs.promises.readFile(filePath, "utf8")
         res.writeHead(200, {
-            "Content-Type":"text/html",
+            "Content-Type":contentType,
             "Content-Length":Buffer.byteLength(data,"utf8")
         });
         res.end(data)
