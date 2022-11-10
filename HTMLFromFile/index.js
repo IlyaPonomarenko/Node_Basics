@@ -13,6 +13,15 @@ const server = http.createServer((req, res) =>{
         if (err) {
             res.statusCode=404;
             res.end(err.message); //for debugging
+        } else {
+            res.writeHead(200, {
+                "Content-Type":"text/html",
+                "Content-Length":Buffer.byteLength(data,"utf8")
+            });
+            res.end(data)
         }
     })
 })
+
+server.listen(port, host, 
+    () => console.log(`Server ${host}:${port} is running`))
